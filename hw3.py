@@ -1,12 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://example.com/songs"  # заміни на реальний сайт
+url = "https://jikan.moe"  
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
 songs = []
-# приклад: всі <li> з класом .song
+
 for item in soup.select("li.song"):
     artist = item.select_one(".artist").text
     title = item.select_one(".title").text
