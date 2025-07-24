@@ -1,15 +1,39 @@
-import requests
+from flask import Flask
 
-url = "https://akabab.github.io/superhero-api/api/all.json"
-response = requests.get(url)
+app = Flask(__name__)
 
-if response.status_code == 200:
-    heroes = response.json()
-    for hero in heroes[:5]:
-        print(f"Ім'я: {hero['name']}")
-        print("Суперздібності:")
-        for stat, value in hero['powerstats'].items():
-            print(f"  {stat.capitalize()}: {value}")
-        print("\n" + "-"*40 + "\n")
-else:
-    print("Не вдалося отримати дані про героїв.")
+@app.route('/')
+def home():
+    return '''
+    <h1>Ласкаво просимо!</h1>
+    <p>Це головна сторінка нашого сайту.</p>
+    '''
+
+@app.route('/about/')
+def about():
+    return '''
+    <h1>Про нас</h1>
+    <p>Ми — команда розробників, яка створює корисні веб-додатки.</p>
+    '''
+
+@app.route('/services/')
+def services():
+    return '''
+    <h1>Наші послуги</h1>
+    <ul>
+        <li>Розробка сайтів</li>
+        <li>SEO-оптимізація</li>
+        <li>Підтримка проектів</li>
+    </ul>
+    '''
+
+@app.route('/contact/')
+def contact():
+    return '''
+    <h1>Контакти</h1>
+    <p>Email: info@example.com</p>
+    <p>Телефон: +380 99 123 4567</p>
+    '''
+
+if __name__ == '__main__':
+    app.run(debug=True)
